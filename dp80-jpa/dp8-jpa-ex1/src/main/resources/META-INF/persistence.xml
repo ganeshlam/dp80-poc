@@ -1,0 +1,24 @@
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/persistence" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
+			http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" version="2.0">
+
+	<persistence-unit name="puex1" transaction-type="RESOURCE_LOCAL">
+
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>org.dp80.jpa.ex1.model.Employee</class>
+		<properties>
+			<!-- JPA parameters -->
+<!-- 			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" /> -->
+<!-- 			<property name="javax.persistence.jdbc.url" value="jdbc:derby:DerbiEx1.db;create=true" /> -->
+<!-- 			<property name="javax.persistence.jdbc.user" value="" /> -->
+<!-- 			<property name="javax.persistence.jdbc.password" value="" /> -->
+
+			<!-- Hibernate parameters -->
+			<property name="hibernate.hbm2ddl.auto" value="create" />
+<!-- 			<property name="hibernate.connection.url" value="jdbc:derby:DerbiEx1.db;create=true" /> -->
+<!-- 			<property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.EmbeddedDriver" /> -->
+<!-- 			<property name="hibernate.dialect" value="org.hibernate.dialect.DerbyTenSevenDialect" /> -->
+<!-- 			<property name="hibernate.connection.username" value="" /> -->
+<!-- 			<property name="hibernate.connection.password" value="" /> -->			
+		</properties>
+	</persistence-unit>
+</persistence>

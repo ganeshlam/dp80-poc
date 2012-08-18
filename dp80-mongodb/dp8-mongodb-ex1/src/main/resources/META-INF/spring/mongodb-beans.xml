@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+								http://www.springframework.org/schema/beans/spring-beans.xsd 
+								http://www.springframework.org/schema/data/mongo
+          						http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
+
+	<!-- Mongo Template -->
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongo" ref="mongo" />
+		<constructor-arg name="databaseName" value="test" />
+	</bean>
+
+	<!-- Factory bean that creates the Mongo instance -->
+	<mongo:mongo id="mongo" replica-set="localhost:27017, localhost:27018, localhost:27019" >
+		<mongo:options 
+			connections-per-host="8" 
+			threads-allowed-to-block-for-connection-multiplier="4" 
+			connect-timeout="1000" 
+			max-wait-time="15000"
+			max-auto-connect-retry-time="30000" 
+			auto-connect-retry="true" 
+			socket-keep-alive="true" 
+			socket-timeout="1500"
+			 slave-ok="true" 
+			 write-number="1" 
+			 write-timeout="0" 
+			 write-fsync="true"  />
+	</mongo:mongo>
+	
+	<mongo:repositories base-package="org.dp80.mongodb.ex1.repository" />
+</beans>

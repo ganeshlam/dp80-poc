@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.dp80</groupId>
+		<artifactId>dp80-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<groupId>com.dp80.mongodb</groupId>
+	<artifactId>dp80-mongodb</artifactId>
+	<packaging>pom</packaging>
+	<name>DP80 :: MongoDB</name>
+
+	<!-- Properties -->
+	<properties>
+		<spring-mongodb-version>1.0.2.RELEASE</spring-mongodb-version>
+		<spring-jpa-version>1.1.0.RELEASE</spring-jpa-version>
+	</properties>
+
+	<!-- Modules -->
+	<modules>
+		<module>dp8-mongodb-ex1</module>
+	</modules>
+
+	<!-- MANAGEMENT DEPENDENCY -->
+	<dependencyManagement>
+		<dependencies>
+
+		</dependencies>
+	</dependencyManagement>
+
+	<!-- DEPENDENCIES -->
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
+			<version>${spring-mongodb-version}</version>
+		</dependency>
+	</dependencies>
+
+</project>

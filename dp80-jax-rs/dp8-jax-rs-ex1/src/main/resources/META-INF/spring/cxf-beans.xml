@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util" xmlns:cxf="http://cxf.apache.org/core" xmlns:jaxrs="http://cxf.apache.org/jaxrs" xmlns:httpj="http://cxf.apache.org/transports/http-jetty/configuration"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+								http://www.springframework.org/schema/beans/spring-beans.xsd 
+								http://www.springframework.org/schema/context 
+								http://www.springframework.org/schema/context/spring-context.xsd
+								http://www.springframework.org/schema/util
+								http://www.springframework.org/schema/util/spring-util.xsd
+								http://cxf.apache.org/core
+        						http://cxf.apache.org/schemas/core.xsd
+								http://cxf.apache.org/jaxrs 
+								http://cxf.apache.org/schemas/jaxrs.xsd
+								http://cxf.apache.org/transports/http-jetty/configuration
+								http://cxf.apache.org/schemas/configuration/http-jetty.xsd">
+	
+	<!-- JAX-RS server configuration -->
+	<jaxrs:server id="customerServer" bus="cxf" address="http://0.0.0.0:9090">
+		<jaxrs:serviceBeans>
+			<ref bean="customerService" />
+		</jaxrs:serviceBeans>
+		<jaxrs:providers>
+			<ref bean="jaxbProvider" />
+			<ref bean="jsonProvider" />
+		</jaxrs:providers>
+	</jaxrs:server>
+
+	<!-- XML provider -->
+	<bean id="jaxbProvider" class="org.apache.cxf.jaxrs.provider.JAXBElementProvider">
+		<property name="singleJaxbContext" value="true" />
+		<property name="schemaHandler" ref="schemaHolder" />
+	</bean>
+
+	<!-- JSON provider -->
+	<bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.json.JSONProvider">
+		<property name="schemaHandler" ref="schemaHolder" />
+	</bean>
+
+	<!-- Schemas -->
+	<bean id="schemaHolder" class="org.apache.cxf.jaxrs.utils.schemas.SchemaHandler">
+		<property name="schemas" ref="schemas" />
+	</bean>
+
+	<util:list id="schemas">
+		<value>classpath:/schemas/customer.xsd</value>
+	</util:list>
+
+	<!-- Spring beans -->
+	<context:component-scan base-package="org.dp80.jaxrs.ex1.service" />
+
+</beans>

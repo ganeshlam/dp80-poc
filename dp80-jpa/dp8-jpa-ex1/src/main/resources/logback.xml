@@ -1,0 +1,51 @@
+<!-- configuration attributes: - debug (true|false): show logback status information. - scan (true|false): scanning for changes in configuration file and automatic re-configuraion. By default, the configuration file will be scanned for changes once every minute. - scanPeriod (ex. 30 seconds): scan period. -->
+<configuration debug="true">
+
+	<jmxConfigurator />
+
+	<appender class="ch.qos.logback.core.ConsoleAppender" name="STDOUT">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} | %-5level | [%thread] | %msg | [%file:%line] | %logger{200} %n</Pattern>
+		</layout>
+	</appender>
+
+	<appender class="ch.qos.logback.core.rolling.RollingFileAppender" name="FILE">
+
+		<File>log/logger.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>log/logger-log.%i.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>5MB</MaxFileSize>
+		</triggeringPolicy>
+
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} | %-5level | [%thread] | %msg | [%file:%line] | %logger{200} %n</Pattern>
+		</layout>
+	</appender>
+	
+	<logger name="org.dp80">
+		<level value="ALL" />
+	</logger>
+
+	<!-- 
+		http://docs.jboss.org/hibernate/core/4.1/manual/en-US/html/ch03.html#configuration-logging
+	 -->
+	<logger name="org.hibernate.SQL">
+		<level value="ALL" />
+	</logger>
+		
+	<logger name="org.hibernate.type">
+		<level value="ERROR" />
+	</logger>			
+	
+	<root>
+		<level value="INFO" />
+<!-- 		<appender-ref ref="FILE" /> -->
+		<appender-ref ref="STDOUT" />
+	</root>
+
+</configuration>
